@@ -1,3 +1,13 @@
+<?php
+    session_start();
+    // checking user is logged in or not
+    if(!isset($_SESSION['user'])) {
+        header("Location: login.php");
+    }
+
+    include "db/db.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +18,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <link rel="stylesheet" href="src/css/style.css">
 </head>
 <body>
@@ -48,10 +60,10 @@
                             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                                 <div class="px-4 py-3" role="none">
                                     <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                        Raju Rayhan
+                                        <?= $_SESSION['user']['Username'] ?>
                                     </p>
                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                        rayhankobir793@gmail.com
+                                        <?= $_SESSION['user']['Email'] ?>
                                     </p>
                                 </div>
                                 <ul class="" role="none">
@@ -62,7 +74,7 @@
                                         <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Profile</a>
                                     </li>
                                     <li>
-                                        <button class="w-full block px-4 py-2.5 text-sm text-white bg-rose-500 rounded-b-lg hover:bg-rose-600 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</button>
+                                        <button onclick="logout();" class="w-full block px-4 py-2.5 text-sm text-white bg-rose-500 rounded-b-lg hover:bg-rose-600 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</button>
                                     </li>
                                 </ul>
                             </div>
@@ -72,3 +84,15 @@
             </div>
         </nav>
     </header>
+
+    <script>
+        function logout() {
+            $.ajax({
+                url: "functions/logout.php",
+                success: function(data) {
+                    swal("Logged out!", "", "success");
+                    location.reload();
+                }
+            })
+        }
+    </script>
