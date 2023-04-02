@@ -1,4 +1,5 @@
 <?php
+    $title = "Location | Asset Management System";
     include "includes/header.php";
     include "includes/aside.php";
 
@@ -147,15 +148,15 @@
                         success: function(data) {
                             if(data == 1) {
                                 swal("Successfull", "Successfully added the location.", "success");
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 1000);
                             }else {
                                 swal("Failed", "Failed to insert the location!", "error");
                             }
-                            setTimeout(function() {
-                                window.location.reload();
-                            }, 1000)
                         },
                         error: function(error) {
-                            console.log(error);
+                            swal("Failed", "Something went wrong!", "error");
                         }
                     })
                 }
@@ -179,15 +180,15 @@
                         success: function(data) {
                             if(data == 1) {
                                 swal("Successfull", "Successfully updated the location.", "success");
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 1000);
                             }else {
                                 swal("Failed", "Failed to update the location!", "error");
                             }
-                            setTimeout(function() {
-                                window.location.reload();
-                            }, 1000)
                         },
                         error: function(error) {
-                            console.log(error);
+                            swal("Failed", "Something went wrong!", "error");
                         }
                     })
                 }
@@ -212,15 +213,15 @@
                         success: function(data) {
                             if(data == 1) {
                                 swal("Successfull", "Successfully deleted the locations.", "success");
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 1000);
                             }else {
                                 swal("Failed", "Failed to delete the locations!", "error");
                             }
-                            setTimeout(function() {
-                                location.reload();
-                            }, 1000)
                         },
                         error: function(error) {
-                            console.log(error);
+                            swal("Failed", "Something went wrong!", "error");
                         }
                     })
                 }
@@ -248,7 +249,7 @@
             })
         });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 
-</body>
-</html>
+<?php
+    include 'includes/footer.php';
+?>

@@ -14,20 +14,7 @@
     $user_id = $_POST['user_id'];
     $LastUpdate = date('Y:m:d H:m:s');
 
-    $sql = "INSERT INTO location(ItemName, MfgId, PartNumber, SerialNumber, HwRev, AssetTag, SwVersion, IpAddress, LocId, Description, UserId, LastUpdate) VALUES(
-        '$item_name',
-        '$mfg_id',
-        '$part_no',
-        '$serial_no',
-        '$hwrev',
-        '$asset_tag',
-        '$sw_version',
-        '$ip_address',
-        '$loc_id',
-        '$description',
-        '$user_id',
-        '$LastUpdate',
-    )";
+    $sql = "INSERT INTO assetinfo(ItemName, MfgId, PartNumber, SerialNumber, HwRev, AssetTag, SwVersion, IpAddress, LocId, Description, UserId, LastUpdate) VALUES('$item_name','$mfg_id','$part_no','$serial_no','$hwrev','$asset_tag','$sw_version','$ip_address','$loc_id','$description','$user_id','$LastUpdate')";
     if(mysqli_query($conn, $sql)) {
         echo 1;
     }else {
